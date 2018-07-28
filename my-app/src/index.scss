@@ -1,0 +1,51 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+p {
+  color: pink;
+}
+h1 {
+  font-size: 45px;
+}
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.input-group {
+  width: 100%;
+}
+.movie-info {
+  margin-top: 15vh;
+}
+.poster {
+  width: 100%;
+  height: 100%;
+}
+.suggest-list {
+  z-index: 999;
+}
+.search-bar-div {
+  position: absolute;
+  width: 90%;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.suggest-item {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(0, 0, 0, 1);
+}

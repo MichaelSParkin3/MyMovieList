@@ -1,0 +1,23 @@
+{
+  "name": "mymovielist",
+  "version": "1.0.0",
+  "description": "App made with reactjs and redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelSParkin3/MyMovieList.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelSParkin3/MyMovieList/issues"
+  },
+  "homepage": "https://github.com/MichaelSParkin3/MyMovieList#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "create-react-app": "^1.5.2"
+  }
+}
