@@ -8,6 +8,7 @@ var typeTimer;
 var searchTerm;
 var movieFunc;
 var movieArray;
+var suggestionsLoaded = false;
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -20,12 +21,13 @@ export default class SearchBar extends React.Component {
     this.getSearchSuggestions = this.getSearchSuggestions.bind(this);
     this.createImage = this.createImage.bind(this);
     this.testSend = this.testSend.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   render() {
     return (
       <div className="search-bar-div">
-        <form className="input-group">
+        <form onSubmit={this.onFormSubmit} className="input-group">
           <input
             placeholder="Type here to search for a movie"
             className="form-control"
@@ -48,11 +50,30 @@ export default class SearchBar extends React.Component {
       </div>
     );
   }
-
-  testSend(object) {
-    this.props.goMovie(object);
+  /*
+Handles ENTER button press in searchbar component
+*/
+  onFormSubmit(e) {
+    e.preventDefault();
+    if (this.state.text[0] != null) {
+      document.getElementById('checkbox').checked = false;
+      this.props.goMovie(this.state.text[0]);
+      this.setState({ term: '' });
+      this.setState({ text: [] });
+    }
   }
-
+  /*
+  Handles when a movieSuggestion item is clicked
+  */
+  testSend(object) {
+    document.getElementById('checkbox').checked = false;
+    this.props.goMovie(object);
+    this.setState({ text: [] });
+    this.setState({ term: '' });
+  }
+  /*
+  When text in searchbar is changed it generates line of 5 suggetion items
+  */
   onInputChange(event) {
     this.setState({ term: event.target.value });
     this.setState({ text: [] });
@@ -63,16 +84,20 @@ export default class SearchBar extends React.Component {
       typeTimer = setTimeout(() => {
         this.startSearch(searchTerm);
         isTimerRunning = false;
-      }, 500);
+      }, 300);
     } else {
       console.log('Timer is Runnoing');
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
         this.startSearch(searchTerm);
         isTimerRunning = false;
-      }, 500);
+      }, 300);
     }
   }
+
+  /*
+  checks to see if current search term is blank and if it isn't it will continue generating items
+  */
 
   startSearch(term) {
     if (term == '') {
@@ -83,6 +108,10 @@ export default class SearchBar extends React.Component {
       this.getSearchSuggestions(term);
     }
   }
+
+  /*
+  Gets the suggestions from the database and adds them to the current state
+  */
 
   getSearchSuggestions(term) {
     console.log(this.state.text);
@@ -102,6 +131,7 @@ export default class SearchBar extends React.Component {
         movieArray = response.data.results;
         console.log(movieArray);
         this.setState({ text: movieArray });
+        suggestionsLoaded = true;
       }.bind(this)
     );
   }
